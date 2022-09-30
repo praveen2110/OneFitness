@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OneFitnessVue.Common.Notification;
-using OneFitnessVue.Data.Enquiry.Queries;
 using OneFitnessVue.Data.GeneralSetting.Queries;
 using OneFitnessVue.Data.Installments.Queries;
 using OneFitnessVue.Data.MemberRegistration.Queries;
@@ -14,7 +13,6 @@ using OneFitnessVue.Data.Reporting.Queries;
 using OneFitnessVue.Data.TaxMaster.Queries;
 using OneFitnessVue.Data.UserMaster.Queries;
 using OneFitnessVue.Data.WorkOut.Queries;
-using OneFitnessVue.Services.Messages;
 
 namespace OneFitnessVue.Extensions
 {
@@ -24,7 +22,7 @@ namespace OneFitnessVue.Extensions
             IConfiguration configuration)
         {
             services.AddTransient<INotificationService, NotificationService>();
-            services.AddTransient<IEmailSender, EmailSender>();
+            
 
             services.AddTransient<IUserMasterQueries, UserMasterQueries>();
         
@@ -41,8 +39,7 @@ namespace OneFitnessVue.Extensions
          
             services.AddTransient<IPaymentDetailsQueries, PaymentDetailsQueries>();
             services.AddTransient<IGeneralSettingQueries, GeneralSettingQueries>();
-            services.AddScoped<IReportingQueries, ReportingQueries>();
-            services.AddScoped<IEnquiryQueries, EnquiryQueries>();
+            services.AddScoped<IReportingQueries, ReportingQueries>();            
             return services;
         }
     }

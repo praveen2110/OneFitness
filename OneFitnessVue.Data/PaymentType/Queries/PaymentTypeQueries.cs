@@ -22,6 +22,16 @@ namespace OneFitnessVue.Data.PaymentType.Queries
                 {
                     Text = "Cash",
                     Value = "1"
+                },
+                new SelectListItem()
+                {
+                    Text = "Card",
+                    Value = "2"
+                },
+                new SelectListItem()
+                {
+                    Text = "UPI",
+                    Value = "3"
                 }
             };
 

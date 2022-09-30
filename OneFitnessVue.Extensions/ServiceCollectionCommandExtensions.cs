@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using OneFitnessVue.Data.Enquiry.Command;
 using OneFitnessVue.Data.MemberRegistration.Command;
 using OneFitnessVue.Data.PaymentDetails.Command;
 using OneFitnessVue.Data.Reporting.Command;
@@ -17,8 +15,7 @@ namespace OneFitnessVue.Extensions
             services.AddScoped<IMemberRegistrationCommand, MemberRegistrationCommand>();
           
             services.AddScoped<IPaymentDetailsCommand, PaymentDetailsCommand>();
-            services.AddScoped<IReportingCommand, ReportingCommand>();
-            services.AddScoped<IEnquiryCommand, EnquiryCommand>();
+            services.AddScoped<IReportingCommand, ReportingCommand>();            
             return services;
         }
     }

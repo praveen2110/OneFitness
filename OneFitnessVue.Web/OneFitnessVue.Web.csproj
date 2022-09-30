@@ -21,7 +21,6 @@
     <ProjectReference Include="..\OneFitnessVue.Data\OneFitnessVue.Data.csproj" />
     <ProjectReference Include="..\OneFitnessVue.Extensions\OneFitnessVue.Extensions.csproj" />
     <ProjectReference Include="..\OneFitnessVue.Model\OneFitnessVue.Model.csproj" />
-    <ProjectReference Include="..\OneFitnessVue.Services\OneFitnessVue.Services.csproj" />
     <ProjectReference Include="..\OneFitnessVue.ViewModel\OneFitnessVue.ViewModel.csproj" />
   </ItemGroup>
 

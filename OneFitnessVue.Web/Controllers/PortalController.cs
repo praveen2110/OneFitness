@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OneFitnessVue.Common;
 using OneFitnessVue.Data.UserMaster.Queries;
-using OneFitnessVue.Services.Messages;
 using OneFitnessVue.ViewModel.Login;
 using OneFitnessVue.ViewModel.Messages;
 using OneFitnessVue.ViewModel.Usermaster;
@@ -16,17 +15,16 @@ namespace OneFitnessVue.Web.Controllers
     public class PortalController : Controller
     {
         private readonly IUserMasterQueries _userMasterQueries;
-        private readonly IEmailSender _emailSender;
+        
         private readonly IHttpContextAccessor _httpContextAccessor;
        
       
         private readonly IDNTCaptchaValidatorService _validatorService;
-        public PortalController(IUserMasterQueries userMasterQueries, IEmailSender emailSender, 
+        public PortalController(IUserMasterQueries userMasterQueries, 
             IHttpContextAccessor httpContextAccessor, 
             IDNTCaptchaValidatorService validatorService)
         {
-            _userMasterQueries = userMasterQueries;
-            _emailSender = emailSender;
+            _userMasterQueries = userMasterQueries;            
 
             _httpContextAccessor = httpContextAccessor;
             _validatorService = validatorService;
@@ -110,48 +108,6 @@ namespace OneFitnessVue.Web.Controllers
             HttpContext.Session.SetString("Hdrandomtoken", token);
             return View(loginViewModel);
         }
-
-
-        [HttpGet]
-        public IActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [ValidateDNTCaptcha(ErrorMessage = "Please enter valid security code", CaptchaGeneratorLanguage = Language.English, CaptchaGeneratorDisplayMode = DisplayMode.ShowDigits)]
-        public IActionResult ForgotPassword(ForgotPasswordViewModel forgotPasswordViewModel)
-        {
-            if (!_userMasterQueries.CheckUsernameExists(forgotPasswordViewModel.UserName))
-            {
-                ModelState.AddModelError("", "Entered Username or Password is Invalid");
-            }
-            else
-            {
-                var userdetails = _userMasterQueries.GetUserByUsername(forgotPasswordViewModel.UserName);
-                var token = HashHelper.CreateHashSHA256((GenerateRandomNumbers.GenerateRandomDigitCode(6)));
-                var body = _emailSender.CreateVerificationEmail(userdetails, token);
-                //_verificationCommand.SendResetVerificationToken(userdetails.UserId, token);
-
-                MessageTemplate messageTemplate = new MessageTemplate()
-                {
-                    ToAddress = userdetails.EmailId,
-                    Subject = "Welcome to OneFitnessVue",
-                    Body = body
-                };
-
-                _emailSender.SendMailusingSmtp(messageTemplate);
-
-                TempData["ForgotPasswordMessage"] = "An email has been sent to the address you have registered." +
-                                                    "Please follow the link in the email to complete your password reset request";
-
-                return RedirectToAction("ForgotPassword", "Portal");
-            }
-
-            return View();
-        }
-
 
         [HttpPost]
         public IActionResult Logout()

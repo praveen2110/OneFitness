@@ -24,8 +24,13 @@ namespace OneFitnessVue.Data.TaxMaster.Queries
                 {
                     new SelectListItem()
                     {
-                        Text = "GST",
+                        Text = "SGST",
                         Value = "1"
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "CGST",
+                        Value = "2"
                     }
                 };
 
@@ -46,16 +51,35 @@ namespace OneFitnessVue.Data.TaxMaster.Queries
 
         public TaxMasterModel GetTaxDetailsbyTaxId(int taxId)
         {
-            var taxdetails = new TaxMasterModel()
+            TaxMasterModel taxdetails;
+            switch (taxId)
             {
-                TaxId =1,
-                Status = true,
-                TaxRate = 10,
-                TaxType = "GST",
-                IdentificationNo = "155555555555"
-            };
+                case 1:
+                    taxdetails = new TaxMasterModel()
+                    {
+                        TaxId = 1,
+                        Status = true,
+                        TaxRate = 5,
+                        TaxType = "SGST",
+                        IdentificationNo = "155555555555"
+                    };
+                    return taxdetails;
 
-            return taxdetails;
+                case 2:
+                    taxdetails = new TaxMasterModel()
+                    {
+                        TaxId = 2,
+                        Status = true,
+                        TaxRate = 5,
+                        TaxType = "CGST",
+                        IdentificationNo = "155555555555"
+                    };
+                    return taxdetails;
+                default:
+                    taxdetails = new TaxMasterModel();
+                    return taxdetails;
+
+            }
 
         }
     }

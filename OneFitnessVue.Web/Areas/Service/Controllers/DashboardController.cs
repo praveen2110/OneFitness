@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OneFitnessVue.Common;
 using OneFitnessVue.Common.Notification;
-using OneFitnessVue.Data.Enquiry.Queries;
 using OneFitnessVue.Data.Reporting.Queries;
 using OneFitnessVue.Data.UserMaster.Queries;
 using OneFitnessVue.ViewModel.Dashboard;
@@ -24,17 +23,15 @@ namespace OneFitnessVue.Web.Areas.Service.Controllers
         private readonly IReportingQueries _reportingQueries;
         private readonly INotificationService _notificationService;
       
-        private readonly IUserMasterQueries _userMasterQueries;
-        private readonly IEnquiryQueries _enquiryQueries;
+        private readonly IUserMasterQueries _userMasterQueries;       
         public DashboardController(IReportingQueries reportingQueries,
             INotificationService notificationService,
           
-            IUserMasterQueries userMasterQueries, IEnquiryQueries enquiryQueries)
+            IUserMasterQueries userMasterQueries)
         {
             _reportingQueries = reportingQueries;
             _notificationService = notificationService;
-            _userMasterQueries = userMasterQueries;
-            _enquiryQueries = enquiryQueries;
+            _userMasterQueries = userMasterQueries;            
         }
 
         public IActionResult Dashboard()
@@ -104,12 +101,7 @@ namespace OneFitnessVue.Web.Areas.Service.Controllers
             if (_reportingQueries.GetRefundMonthlyCount() != null)
             {
                 ViewBag.RefundMonthlyCount = _reportingQueries.GetRefundMonthlyCount();
-            }
-
-            if (_enquiryQueries.EnquiryCount() != null)
-            {
-                ViewBag.EnquiryCount = _enquiryQueries.EnquiryCount();
-            }
+            }           
             
             if (_reportingQueries.GetTopMembershipTypeInYear() != null)
             {

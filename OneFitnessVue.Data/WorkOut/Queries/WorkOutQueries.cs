@@ -20,6 +20,21 @@ namespace OneFitnessVue.Data.WorkOut.Queries
                     {
                         Text = "GYM",
                         Value = "1"
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "Yoga",
+                        Value = "2"
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "Aerobics",
+                        Value = "3"
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "Zumba",
+                        Value = "4"
                     }
                 };
 

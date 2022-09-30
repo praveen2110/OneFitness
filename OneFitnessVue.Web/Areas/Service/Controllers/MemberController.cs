@@ -23,7 +23,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using OneFitnessVue.ViewModel.Documents;
 
 namespace OneFitnessVue.Web.Areas.Service.Controllers
 {
@@ -498,7 +497,7 @@ namespace OneFitnessVue.Web.Areas.Service.Controllers
                 }
 
 
-                memberMainViewModel.ListofDocuments = new List<AttachmentGridViewModel>();
+                
 
 
                 var payment = _paymentDetailsQueries.ListofPayments(memberId.Value);

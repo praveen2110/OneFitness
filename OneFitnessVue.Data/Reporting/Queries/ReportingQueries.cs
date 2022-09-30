@@ -17,14 +17,7 @@ namespace OneFitnessVue.Data.Reporting.Queries
         {
             _configuration = configuration;
         }
-        public List<RenewalReportViewModel> Get_RenewalReport(RenewalReportingViewModel renewalReport)
-        {
-            using var con = new SqlConnection(_configuration.GetConnectionString("DatabaseConnection"));
-            var para = new DynamicParameters();
-            para.Add("@Paymentfromdt", renewalReport.Fromdate);
-            para.Add("@Paymenttodt", renewalReport.Todate);
-            return con.Query<RenewalReportViewModel>("Usp_GetAllRenwalrecordsFromBetweenDate", para, null, true, 0, commandType: CommandType.StoredProcedure).ToList();
-        }
+        
         public List<YearwiseChartResponseViewModel> YearwiseChartRenewedResponse()
         {
             using var con = new SqlConnection(_configuration.GetConnectionString("DatabaseConnection"));
